@@ -1,10 +1,10 @@
 -- site_users
 
 INSERT INTO site_users(name, role, st_login, personal_data, password_hash, cookie)
-VALUES('Тихонков Сергей Алексеевич', 1, 'st064142', '-', '43f57e46', 'ghbefrne');
+VALUES('Тимошенко Станислав Герасимович ', 1, 'st061424', '-', '43f57e46', 'ghbefrne');
 
 INSERT INTO site_users(name, role, st_login, personal_data, password_hash, cookie)
-VALUES('Васильева Алиса Сергеевна', 1, 'st063756', 'студент', '44f44e33', 'lhbafrme');
+VALUES('Иванова Полина Дмитриевна', 1, 'st064524', 'студент', '44f44e33', 'lhbafrme');
 
 INSERT INTO site_users(name, role, st_login, personal_data, password_hash, cookie)
 VALUES('Петрова Светлана Владимировна', 2, 'st068409', ' ', '44f44e33', 'ahbdsrme');
@@ -23,7 +23,7 @@ FROM site_users WHERE name = 'Светлова Влада Петровна';
 
 INSERT INTO notifications(user_id, text, status)
 SELECT user_id, 'check vk pls', 'unread'
-FROM site_users WHERE name = 'Васильева Алиса Сергеевна';
+FROM site_users WHERE name = 'Иванова Полина Дмитриевна';
 
 -- teachers 
 
@@ -54,7 +54,7 @@ INSERT INTO students_subgroup(admin_id, name)
 SELECT student_id, 'Мониторинг'
 FROM students
 JOIN site_users ON students.user_id = site_users.user_id
-WHERE site_users.name = 'Васильева Алиса Сергеевна';
+WHERE site_users.name = 'Иванова Полина Дмитриевна';
 
 -- students(2)
 
@@ -66,7 +66,7 @@ WHERE site_users.name = 'Петрова Светлана Владимировн�
 UPDATE ONLY students
 SET points = 5.0
 FROM site_users WHERE students.user_id = site_users.user_id
-and site_users.name = 'Тихонков Сергей Алексеевич';
+and site_users.name = 'Тимошенко Станислав Герасимович ';
 
 -- cases
 
@@ -87,14 +87,14 @@ INSERT INTO case_student_relations(case_id, student_id, role)
 SELECT case_id, student_id, 'главный консультант'
 FROM cases, students, site_users 
 WHERE students.user_id = site_users.user_id
-and site_users.name = 'Васильева Алиса Сергеевна'
+and site_users.name = 'Иванова Полина Дмитриевна'
 and cases.category = 'уголовное дело';
 
 INSERT INTO case_student_relations(case_id, student_id, role)
 SELECT case_id, student_id, 'главный консультант'
 FROM cases, students, site_users 
 WHERE students.user_id = site_users.user_id
-and site_users.name = 'Тихонков Сергей Алексеевич'
+and site_users.name = 'Тимошенко Станислав Герасимович '
 and cases.category = 'административное дело';
 
 -- case_teacher_relations
@@ -145,11 +145,11 @@ FROM cases;
 INSERT INTO points_feed(student_id, teacher_id, points, reason, date_time)
 SELECT student_id, teacher_id, 5.0 , 'good boy', '2019-12-01 19:10:25-07'
 FROM students, site_users WHERE students.user_id = site_users.user_id
-and site_users.name = 'Тихонков Сергей Алексеевич';
+and site_users.name = 'Тимошенко Станислав Герасимович ';
 
 --duty_roster
 
 INSERT INTO duty_roster(student_id, class_room, start_date_time, finish_date_time)
 SELECT student_id, 1, '2019-12-01 15:00:25-07', '2019-12-01 19:00:25-07'
 FROM students, site_users WHERE students.user_id = site_users.user_id
-and site_users.name = 'Тихонков Сергей Алексеевич';
+and site_users.name = 'Тимошенко Станислав Герасимович ';
